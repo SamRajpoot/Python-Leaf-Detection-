@@ -2,15 +2,15 @@
 
 <div align="center">
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=flat-square&logo=streamlit)](https://streamlit.io/)
-[![Python](https://img.shields.io/badge/Python-3.8+-3776ab?style=flat-square&logo=python)](https://www.python.org/)
-[![Groq](https://img.shields.io/badge/Groq-AI%20API-orange?style=flat-square)](https://groq.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.117-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Groq](https://img.shields.io/badge/Groq-AI%20API-FF6B35?style=for-the-badge&logo=groq&logoColor=white)](https://groq.com/)
+[![License](https://img.shields.io/badge/License-MIT-4CAF50?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 
-**AI-powered plant disease identification with REST API and web interface**
+AI-powered plant disease detection using Llama Vision + Groq API
 
-[Features](#features) • [Quick Start](#quick-start) • [API](#api-reference) • [Deployment](#deployment)
+[Quick Start](#quick-start) • [API](#api-reference) • [Deploy](#deployment)
 
 </div>
 
@@ -18,162 +18,62 @@
 
 ## Overview
 
-An enterprise-grade disease detection system that analyzes leaf images using Meta's Llama Vision models through the Groq API. Get precise disease identification, severity assessment, and treatment recommendations in seconds.
-
-**Key Capabilities:**
-- Identifies 500+ diseases (fungal, bacterial, viral, pest damage, nutrient deficiencies)
-- Dual interfaces: REST API + interactive web application
-- Sub-5-second analysis with 85-95% accuracy
-- Comprehensive results with symptoms, causes, and treatment protocols
-- Production-ready with cloud deployment support
-
-## Features
-
-| Feature | Details |
-|---------|---------|
-| **Disease Detection** | 500+ diseases across all categories with confidence scores |
-| **Severity Assessment** | Classifies impact as Mild, Moderate, or Severe |
-| **Analysis Speed** | 2-5 seconds average processing time |
-| **Image Support** | JPEG, PNG, WebP, BMP, TIFF (up to 10MB) |
-| **Treatment Guidance** | Evidence-based recommendations per disease |
-| **API Documentation** | Auto-generated OpenAPI/Swagger docs |
-| **Web Interface** | Responsive Streamlit UI with instant preview |
-| **Cloud Ready** | Deploy to Vercel, AWS, Railway, or Docker
-
----
-
-## Project Structure
-
-```
-leaf-disease-detection/
-├── main.py                    # Streamlit web application
-├── app.py                     # FastAPI backend
-├── utils.py                   # Image processing utilities
-├── test_api.py                # API test suite
-├── requirements.txt           # Python dependencies
-├── vercel.json                # Vercel deployment config
-├── LICENSE                    # MIT License
-├── README.md                  # This file
-├── Leaf Disease/
-│   ├── main.py               # AI detection engine
-│   └── config.py             # Configuration
-└── Media/                     # Sample test images
-```
-
-## Architecture
-
-### Backend: FastAPI (app.py)
-RESTful API service with automatic documentation and CORS support.
-
-**Endpoints:**
-- `POST /disease-detection-file` — Analyze leaf image
-- `GET /` — API information
-- `GET /health` — Health check
-- `GET /docs` — Interactive API documentation
-
-### Frontend: Streamlit (main.py)
-Interactive web interface with drag-and-drop image upload and real-time visualization.
+Identify 500+ plant diseases in 2-5 seconds with 85-95% accuracy. Provides severity assessment, symptoms, causes, and treatment recommendations.
 
 **Features:**
-- Image preview and instant upload
-- Real-time disease analysis
-- Color-coded severity indicators
-- Professional result formatting
-- Mobile-responsive design
-
-### AI Engine: Leaf Disease/main.py
-Core detection using Groq API and Meta's Llama Vision model.
-
-**Capabilities:**
-- Base64 image encoding and processing
-- Multi-step prompt engineering
-- JSON response parsing
-- Comprehensive error handling
-- Confidence quantification
+- 500+ disease detection (fungal, bacterial, viral, pest damage, nutrient deficiencies)
+- REST API + Streamlit web interface
+- Real-time analysis with confidence scores
+- Auto-generated API documentation
+- Cloud-ready (Vercel, Docker, AWS)
 
 ---
 
-## Quick Start
+## Setup
 
-### Prerequisites
-- Python 3.8+ (3.9+ recommended)
-- pip or conda
-- Groq API key (free at [console.groq.com](https://console.groq.com))
-- Git
+**Prerequisites:** Python 3.8+, pip, Git, [Groq API key](https://console.groq.com)
 
-### 1. Clone & Setup
-
+**1. Clone & Install**
 ```bash
 git clone https://github.com/shukur-alom/leaf-diseases-detect.git
 cd leaf-diseases-detect
 python -m venv venv
 .\venv\Scripts\activate  # Windows
 source venv/bin/activate  # Linux/macOS
-```
-
-### 2. Install Dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
-### 3. Configure Environment
-
-Create `.env` file in project root:
-
+**2. Configure**
+Create `.env`:
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+GROQ_API_KEY=your_api_key_here
 MODEL_NAME=meta-llama/llama-4-scout-17b-16e-instruct
 DEFAULT_TEMPERATURE=0.3
 DEFAULT_MAX_TOKENS=1024
 ```
 
-Get your API key: Visit [console.groq.com](https://console.groq.com), sign up, and generate a key.
-
-### 4. Run Application
-
-**Web Interface:**
+**3. Run**
 ```bash
+# Web Interface (http://localhost:8501)
 streamlit run main.py
-```
-Access at `http://localhost:8501`
 
-**REST API:**
-```bash
-uvicorn app:app --reload --port 8000
-```
-Access at `http://localhost:8000` | Docs at `/docs`
-
-**Both (in separate terminals):**
-```bash
-# Terminal 1
-uvicorn app:app --port 8000
-
-# Terminal 2
-streamlit run main.py
+# REST API (http://localhost:8000)
+uvicorn app:app --reload
 ```
 
 ---
 
-## API Reference
+## API
 
 ### POST /disease-detection-file
+Analyze a leaf image.
 
-Analyze a leaf image for diseases.
-
-**Request:**
 ```bash
 curl -X POST "http://localhost:8000/disease-detection-file" \
-  -H "Content-Type: multipart/form-data" \
   -F "file=@leaf_image.jpg"
 ```
 
-**Parameters:**
-| Parameter | Type | Max Size | Formats |
-|-----------|------|----------|---------|
-| file | file | 10 MB | JPEG, PNG, WebP, BMP, TIFF |
-
-**Response (200 OK):**
+**Response:**
 ```json
 {
   "disease_detected": true,
@@ -181,167 +81,76 @@ curl -X POST "http://localhost:8000/disease-detection-file" \
   "disease_type": "fungal",
   "severity": "moderate",
   "confidence": 92.5,
-  "symptoms": [
-    "Brown circular lesions with concentric rings",
-    "Lesions primarily on lower leaves",
-    "Yellowing around affected areas"
-  ],
-  "possible_causes": [
-    "High humidity and wet conditions",
-    "Poor air circulation",
-    "Overhead watering"
-  ],
-  "treatment": [
-    "Remove infected leaves",
-    "Apply copper fungicide",
-    "Improve air circulation",
-    "Water at soil level only"
-  ],
+  "symptoms": ["Brown circular lesions", "Yellowing around areas"],
+  "possible_causes": ["High humidity", "Poor air circulation"],
+  "treatment": ["Remove infected leaves", "Apply fungicide"],
   "analysis_timestamp": "2024-01-12T15:30:45.123456+00:00"
 }
 ```
 
-**Error Responses:**
-```json
-// 400 Bad Request
-{ "detail": "Invalid file type. Supported: JPEG, PNG, WebP, BMP, TIFF" }
-
-// 413 Payload Too Large
-{ "detail": "File size exceeds 10MB limit" }
-
-// 500 Internal Server Error
-{ "detail": "Analysis failed. Please try again." }
-```
-
-### GET /
-
-API information endpoint.
-
-**Response:**
-```json
-{
-  "message": "Leaf Disease Detection API",
-  "version": "1.0.0",
-  "description": "AI-powered disease detection",
-  "status": "operational"
-}
-```
-
 ### GET /health
-
-Health check endpoint.
-
-**Response:**
-```json
-{
-  "status": "healthy",
-  "service": "Leaf Disease Detection API"
-}
-```
+Health status check.
 
 ### GET /docs
-
-Interactive API documentation (Swagger UI)
+Interactive API documentation (Swagger UI).
 
 ---
 
 ## Configuration
 
-### Environment Variables
-
 | Variable | Required | Default | Purpose |
 |----------|----------|---------|---------|
-| `GROQ_API_KEY` | ✅ Yes | — | Groq API authentication |
-| `MODEL_NAME` | No | `meta-llama/llama-4-scout-17b-16e-instruct` | AI model to use |
-| `DEFAULT_TEMPERATURE` | No | `0.3` | Model creativity (0.0-2.0) |
+| `GROQ_API_KEY` | ✅ Yes | — | API authentication |
+| `MODEL_NAME` | No | `meta-llama/llama-4-scout-17b-16e-instruct` | Model to use |
+| `DEFAULT_TEMPERATURE` | No | `0.3` | Model creativity (0-2.0) |
 | `DEFAULT_MAX_TOKENS` | No | `1024` | Max response length |
 
-### Model Temperature Guide
-
-- **0.0-0.3**: Conservative, factual (recommended for disease detection)
-- **0.4-0.7**: Balanced creativity and accuracy
-- **0.8-2.0**: High creativity (not recommended)
-
-### Supported Image Formats
-
-| Format | Extension | Max Size | Recommended |
-|--------|-----------|----------|------------|
-| JPEG | .jpg, .jpeg | 10 MB | ✓ |
-| PNG | .png | 10 MB | ✓ |
-| WebP | .webp | 10 MB | ✓ |
-| BMP | .bmp | 10 MB | — |
-| TIFF | .tiff | 10 MB | — |
+**Supported Images:** JPEG, PNG, WebP, BMP, TIFF (max 10MB)
 
 ---
 
 ## Dependencies
 
-**Core:**
-- groq >= 0.31.0
-- fastapi >= 0.116.1
-- uvicorn >= 0.21.1
-- streamlit >= 1.28
-- python-dotenv >= 1.0.0
-- requests >= 2.31.0
-- python-multipart
-
-**Testing:**
-- pytest
-- httpx
-
-Install all:
-```bash
-pip install -r requirements.txt
 ```
+groq>=0.31.0
+fastapi>=0.116.1
+uvicorn>=0.21.1
+streamlit>=1.28
+python-dotenv>=1.0.0
+requests>=2.31.0
+python-multipart
+```
+
+Install: `pip install -r requirements.txt`
 
 ---
 
-## Disease Categories
+## Disease Types
 
-The system identifies diseases across five major categories:
-
-### Fungal Diseases (40+ varieties)
-Early blight, late blight, powdery mildew, leaf spot, rust, anthracnose, etc.
-
-### Bacterial Diseases (15+ varieties)
-Leaf scorch, fire blight, bacterial wilt, xanthomonas, pseudomonas, etc.
-
-### Viral Diseases (20+ varieties)
-Mosaic viruses, yellowing, leaf curl, TMV, CMV, TSWV, PVY, etc.
-
-### Pest Damage (25+ types)
-Mites, aphids, thrips, scale insects, caterpillar feeding, leaf miners, etc.
-
-### Nutrient Deficiencies (10+ types)
-Nitrogen, phosphorus, potassium deficiency, micronutrient issues, pH-related lockout, etc.
+**Fungal** (40+): Early/late blight, powdery mildew, leaf spot, rust, anthracnose
+**Bacterial** (15+): Leaf scorch, fire blight, bacterial wilt, xanthomonas
+**Viral** (20+): Mosaic, yellowing, leaf curl, TMV, CMV
+**Pest Damage** (25+): Mites, aphids, thrips, scale insects, caterpillar feeding
+**Nutrient Deficiency** (10+): N, P, K deficiency, micronutrient issues
 
 ---
 
 ## Testing
 
-### Test the API
-
-**Using Python:**
+**Python:**
 ```python
 import requests
-
-with open('leaf_image.jpg', 'rb') as f:
-    files = {'file': f}
-    response = requests.post(
-        'http://localhost:8000/disease-detection-file',
-        files=files
-    )
-    print(response.json())
+with open('leaf.jpg', 'rb') as f:
+    r = requests.post('http://localhost:8000/disease-detection-file', files={'file': f})
+    print(r.json())
 ```
 
-**Using cURL:**
+**cURL:**
 ```bash
-curl -X POST "http://localhost:8000/disease-detection-file" \
-  -F "file=@Media/leaf_image.jpg"
+curl -X POST "http://localhost:8000/disease-detection-file" -F "file=@leaf.jpg"
 ```
 
-### Run Test Suite
-
+**Test Suite:**
 ```bash
 pytest test_api.py -v
 ```
@@ -350,42 +159,19 @@ pytest test_api.py -v
 
 ## Deployment
 
-### Vercel (Recommended)
-
-1. **Install Vercel CLI:**
+**Vercel:**
 ```bash
 npm install -g vercel
+vercel --prod  # Set GROQ_API_KEY in dashboard
 ```
 
-2. **Deploy:**
-```bash
-vercel --prod
-```
-
-3. **Set environment variables** in Vercel dashboard:
-   - GROQ_API_KEY
-
-### Docker
-
-```dockerfile
-FROM python:3.9-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-EXPOSE 8000
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
-```
-
-Build and run:
+**Docker:**
 ```bash
 docker build -t leaf-detector .
 docker run -p 8000:8000 -e GROQ_API_KEY=your_key leaf-detector
 ```
 
-### Railway, Heroku, AWS
-
-Similar deployment process - provide GROQ_API_KEY as environment variable.
+**Railway/Heroku/AWS:** Set `GROQ_API_KEY` environment variable and deploy.
 
 ---
 
@@ -393,35 +179,24 @@ Similar deployment process - provide GROQ_API_KEY as environment variable.
 
 | Metric | Value |
 |--------|-------|
-| Average Response Time | 2-5 seconds |
-| Accuracy | 85-95% across categories |
+| Response Time | 2-5 seconds |
+| Accuracy | 85-95% |
 | Supported Diseases | 500+ |
 | Max Image Size | 10 MB |
 | Concurrent Requests | 150+/min |
-| Memory Usage | <512 MB per analysis |
+| Memory | <512 MB per analysis |
 
 ---
 
-## 🚀 Deployment
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these guidelines:
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+2. Create feature branch: `git checkout -b feature/name`
+3. Commit: `git commit -m 'Add feature'`
+4. Push: `git push origin feature/name`
+5. Open Pull Request
 
-**Code Standards:**
-- Follow PEP 8 style guide
-- Add docstrings to functions
-- Include type hints
-- Write tests for new features
-- Update documentation
+**Guidelines:** Follow PEP 8, add docstrings, include type hints, write tests.
 
 ---
 
@@ -429,20 +204,13 @@ We welcome contributions! Please follow these guidelines:
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-**You are free to:**
-- Use for any purpose
-- Modify and distribute
-- Include in commercial applications
-
-**Condition:** Include copy of license and copyright notice
-
 ---
 
 ## Support
 
-- **Issues & Bugs:** [GitHub Issues](https://github.com/shukur-alom/leaf-diseases-detect/issues)
+- **Issues:** [GitHub Issues](https://github.com/shukur-alom/leaf-diseases-detect/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/shukur-alom/leaf-diseases-detect/discussions)
-- **API Docs:** `/docs` endpoint when running the application
+- **Docs:** `/docs` endpoint when running the app
 
 ---
 
@@ -451,7 +219,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 - **Groq** - AI inference platform
 - **Meta** - Llama Vision models
 - **FastAPI** - Web framework
-- **Streamlit** - Web application framework
+- **Streamlit** - Web app framework
 
 ---
 
@@ -459,6 +227,6 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 Made with ❤️ for Agriculture & AI
 
-[Report Issues](https://github.com/shukur-alom/leaf-diseases-detect/issues) • [Request Features](https://github.com/shukur-alom/leaf-diseases-detect/discussions)
+[Issues](https://github.com/shukur-alom/leaf-diseases-detect/issues) • [Discussions](https://github.com/shukur-alom/leaf-diseases-detect/discussions)
 
 </div>
